@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+// var htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -30,18 +31,39 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
+      { // 增加加载字体的规则
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: "file-loader?&name=fonts/[name].[ext]"
+        // use: [
+        //   'file-loader'
+        // ]
+      },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        // loader: 'file-loader',
+        loader: "file-loader?&name=img/[name].[ext]?[hash]"
+        // options: {
+        //   name: '[name].[ext]?[hash]'
+        // }
       }
     ]
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      "window.jQuery": "jquery"
+    }),
+    // new htmlWebpackPlugin({
+    //   filename:'index.html',
+    //   // favicon:'1.png',
+    //   hash:true
+    // })
+  ],
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'jquery': 'jquery'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
@@ -57,7 +79,8 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
+  module.exports.output.publicPath = '/event/dist/';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
@@ -73,6 +96,16 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    // new webpack.optimize.CommonsChunkPlugin('common.js'),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: "vendor",
+    //   minChunks: 2
+    // }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      "window.jQuery": "jquery"
+    }),
   ])
 }
