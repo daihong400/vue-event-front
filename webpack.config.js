@@ -1,6 +1,6 @@
-var path = require('path')
-var webpack = require('webpack')
-// var htmlWebpackPlugin = require('html-webpack-plugin')
+var path = require('path');
+var webpack = require('webpack');
+var htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -23,7 +23,6 @@ module.exports = {
         options: {
           loaders: {
           }
-          // other vue-loader options go here
         }
       },
       {
@@ -33,18 +32,11 @@ module.exports = {
       },
       { // 增加加载字体的规则
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        loader: "file-loader?&name=fonts/[name].[ext]"
-        // use: [
-        //   'file-loader'
-        // ]
+        loader: "file-loader?&name=fonts/[name].[ext]?[hash]"
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        // loader: 'file-loader',
         loader: "file-loader?&name=img/[name].[ext]?[hash]"
-        // options: {
-        //   name: '[name].[ext]?[hash]'
-        // }
       }
     ]
   },
@@ -54,11 +46,12 @@ module.exports = {
       $: 'jquery',
       "window.jQuery": "jquery"
     }),
-    // new htmlWebpackPlugin({
-    //   filename:'index.html',
-    //   // favicon:'1.png',
-    //   hash:true
-    // })
+    new htmlWebpackPlugin({
+      filename:'index.html',
+      template: './index.html',
+      // favicon:'1.png',
+      hash:true
+    })
   ],
   resolve: {
     alias: {
@@ -75,11 +68,13 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  // devtool: '#eval-source-map'
 }
 
+
+console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map';
+  // module.exports.devtool = '#source-map';
   module.exports.output.publicPath = '/event/dist/';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([

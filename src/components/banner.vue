@@ -1,52 +1,51 @@
 <template>
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="str in listImg" :style="{ backgroundImage: 'url(' + str.url + ')' }"></div>
-    </div>
-    <div class="swiper-pagination swiper-pagination-white"></div>
-  </div>
+      <div class="banner-bg" :style="{ backgroundImage: 'url(' + listImg.url + ')' }">
+        <div class="banner-text">
+          <h2><span>活动</span>管理数据分析</h2>
+          <p>善数不用筹策，有理有据，成就不凡</p>
+        </div>
+      </div>
 </template>
 
 <script>
-  import Swiper from '../../node_modules/swiper/dist/js/swiper.js';
-  import '../../node_modules/swiper/dist/css/swiper.min.css';
+  // import Swiper from '../../node_modules/swiper/dist/js/swiper.js';
+  // import '../../node_modules/swiper/dist/css/swiper.min.css';
 
   export default {
     props: ['listImg'],
-    mounted() {
-      console.log('mounted', this)
-      var swiper = new Swiper('.swiper-container', {
-        autoplay: {
-          stopOnLastSlide: false,
-        },
-      });
+    mounted() {//插件初始化钩子函数
+
     }
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
-  .swiper-container {
+<style scoped lang="less" rel="stylesheet/less">
+  @deloitte-text-green: #03b02a;
+  @text-white: #ffffff;
+  h2 {
+    margin: 0;
+  }
+  .banner-bg {
+    cursor: default;
     width: 100%;
-    height: 300px;
-    .swiper-wrapper {
-      width: 100%;
-      height: 100%;
-    }
-    .swiper-slide {
-      background-position: center;
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
+    height: 500px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .banner-text {
+      padding-top: 99px;
+      color: @text-white;
+      h2 {
+        font-size: 48px;
+        padding-bottom: 26px;
+        span {
+          color: @deloitte-text-green;
+        }
+      }
+      p {
+        font-size: 30px;
       }
     }
-    .swiper-pagination-bullet {
-      width: 0.833rem;
-      height: 0.833rem;
-      display: inline-block;
-      background: #7c5e53;
-    }
   }
+
 </style>

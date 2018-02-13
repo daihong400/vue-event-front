@@ -1,63 +1,60 @@
 <template>
   <div>
-    <!--首页banner-->
-    <!--<div class="index-banner text-center">-->
-      <!--<h2>-->
-        <!--<span class="deloitte-green">活动分析</span>-->
-        <!--系统-->
-      <!--</h2>-->
-      <!--<p>善数不用筹策，有理有据，成就不凡</p>-->
-    <!--</div>-->
+    <!--banner-->
     <app-banner :listImg="listImg"></app-banner>
     <!--首页主要内容-->
-    <div class="index-content-wrap">
-      <div class="product-view-container">
-        <h3>产品一览</h3>
-        <p class="product-view-title-underline"></p>
-      </div>
-      <div class="container index-content">
-        <div class="row">
-          <div class="col-md-4 text-center index-content-left-img-wrap">
+    <div class="home-menu-table-wrap">
+      <table class="table table-bordered home-menu-table">
+        <tbody>
+        <tr>
+          <td class="paddingClear" rowspan="2">
             <img class="index-content-left-img" src="../assets/RadarMap.png" alt="">
+          </td>
+          <td>
+            <router-link to="CreateActivity">
+              <h3>创建活动</h3>
+              <p>简单易操作，可视化创建丰富营销活动</p>
+            </router-link>
+          </td>
+          <td>
+            <h3>活动管理</h3>
+            <p>一站式管理，二维码、URL便捷投放宣传</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h3>名牌管理</h3>
+            <p>客户报名信息一键生成待打印名牌，省时省力</p>
+          </td>
+          <td>
+            <h3>统计分析</h3>
+            <p>实时监测活动效果数据，查询导出真方便</p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="step-list-wrap">
+      <div class="step-list text-center">
+        <div class="row">
+          <div class="col-xs-6 col-md-3">
+            <a href="#" class="">
+              step1
+            </a>
           </div>
-          <div class="col-md-4">
-            <a href="#createActivity">
-              <div class="index-content-unit text-center">
-                            <span>
-
-                            </span>
-                <h3>创建活动</h3>
-                <p>简单易操作，可视化创建丰富营销活动</p>
-              </div>
-            </a>
-            <a href="#usernameCardManage">
-              <div class="index-content-unit text-center">
-                            <span>
-
-                            </span>
-                <h3>名牌管理</h3>
-                <p>客户报名信息一键生成待打印名牌，省时省力</p>
-              </div>
+          <div class="col-xs-6 col-md-3">
+            <a href="#" class="">
+              step1
             </a>
           </div>
-          <div class="col-md-4">
-            <a href="#analysisManage">
-              <div class="index-content-unit text-center">
-                <span>
-
-                </span>
-                <h3>活动管理</h3>
-                <p>一站式管理，二维码、URL便捷投放宣传</p>
-              </div>
+          <div class="col-xs-6 col-md-3">
+            <a href="#" class="">
+              step1
             </a>
-            <a href="#statisticalAnalysis">
-              <div class="index-content-unit text-center">
-                <span>
-
-                </span>
-                <h3>统计分析</h3>
-                <p>实时监测活动效果数据，查询导出真方便</p>
-              </div>
+          </div>
+          <div class="col-xs-6 col-md-3">
+            <a href="#" class="">
+              step1
             </a>
           </div>
         </div>
@@ -67,40 +64,43 @@
 </template>
 
 <script>
-  import Banner from './banner.vue'
+  import  Banner from './banner.vue'
   import a from '../assets/aasBanner.png'
-  import b from '../assets/RadarMap.png'
-    export default {
-        name: "home",
-      data() {
-        return {
-          listImg: [{
-            url: a
-          }, {
-            url: b
-          }]
-        }
-      },
-      components: {
-        'app-banner': Banner
-      },
-        computed: {
 
-        },
-        methods: {
-          goBack () {
-            window.history.length > 1
-              ? this.$router.go(-1)
-              : this.$router.push('/')
-          }
+  export default {
+    name: "home",
+    data() {
+      return {
+        listImg: {
+          url: a
         }
+      }
+    },
+    components: {
+      'app-banner': Banner
+    },
+    computed: {},
+    methods: {
+      goBack() {
+        window.history.length > 1
+          ? this.$router.go(-1)
+          : this.$router.push('/')
+      }
+    },
+    mounted: function () {
+      $('.home-menu-table td').hover(function () {
+        $(this).find('h3,p').css('color', '#ffffff');
+      }, function () {
+        $(this).find('h3,p').css('color', '#000000');
+      });
     }
+  }
 </script>
 
-<style scoped>
+<style scoped lang="less" rel="stylesheet/less">
   body {
     width: 100%;
-    padding-top: 58px;
+    padding-top: 59px;
     font-family: ﻿MicrosoftYaHei;
   }
 
@@ -108,9 +108,13 @@
     display: inline-block;
   }
 
-  h1,h2,h3,h4,h5,p {
+  h1, h2, h3, h4, h5, p {
     margin: 0;
     color: #000000;
+  }
+
+  a {
+    text-decoration: none;
   }
 
   .clear {
@@ -123,7 +127,7 @@
 
   /*副导航*/
 
-  .nav-attached span{
+  .nav-attached span {
     color: #ffffff;
     line-height: 40px;
   }
@@ -132,41 +136,13 @@
     color: #43b02a;
     line-height: 40px;
   }
+
   /*副导航END*/
 
-  .index-content-wrap {
-    width: 100%;
-    padding-bottom: 195px;
-    background-color: #e8eae9;
-  }
-
-  .container.index-content {
-    padding: 0;
-    background-color: #ffffff;
-  }
-
-  .index-content>.row>.col-md-4{
-    padding: 0;
-    height: 387px;
-  }
-
-  .index-content-left-img{
+  .index-content-left-img {
     padding: 0;
     width: 400px;
     height: 387px;
-  }
-
-  .index-content-unit {
-    width: 100%;
-    height: 193px;
-    background-color: #ffffff;
-    padding: 30px 0 33px 0;
-    border: 1px solid #e8eae9;
-  }
-
-  .index-content-unit:hover {
-    background-color: #7bc869;
-    color: #ffffff;
   }
 
   .index-content-unit svg {
@@ -174,21 +150,15 @@
     height: 70px;
   }
 
-  .index-content-unit>h3 {
+  .index-content-unit > h3 {
     font-size: 18px;
     margin: 0;
     padding-top: 8px;
   }
 
-  .index-content-unit>p {
+  .index-content-unit > p {
     font-size: 14px;
     padding-top: 9px;
-  }
-
-  .common-footer {
-    width: 100%;
-    height: 40px;
-    background-color: rgba(83, 86, 90, 1);
   }
 
   .common-footer p {
@@ -203,7 +173,7 @@
 
   .index-content a:hover {
     color: #000000;
-    text-decoration:none;
+    text-decoration: none;
   }
 
   .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
@@ -220,13 +190,6 @@
     padding: 15px 20px;
   }
 
-  .index-banner {
-    padding-top: 65px;
-    max-width: 1920px;
-    height: 240px;
-    background: url("../assets/aasBanner.png") no-repeat center center;
-  }
-
   .index-banner h2 {
     font-size: 48px;
     padding-bottom: 31px;
@@ -241,21 +204,12 @@
     margin: 0;
   }
 
-
   @media (max-width: 767px) {
-    .index-content-wrap {
-      padding-top: 0;
-    }
 
-    .index-content-left-img-wrap {
-      background-color: #000000;
-    }
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
-    .index-content-left-img-wrap {
-      background-color: #000000;
-    }
+
   }
 
   @media (min-width: 992px) and (max-width: 1199px) {
@@ -263,6 +217,7 @@
       width: 100%;
     }
   }
+
   @media (min-width: 768px) {
 
   }
@@ -270,30 +225,74 @@
   @media (min-width: 1200px) {
 
   }
-  .product-view-container>h3 {
+
+  .product-view-container > h3 {
     color: #000000;
     font-weight: normal;
     margin: 0;
     padding-top: 39px;
   }
 
-  .index-content-left-img-wrap {
-    background-color: #ffffff;
+  .home-menu-table-wrap {
+    height: 197px;
   }
 
-  .product-view-container {
-    max-width: 1200px;
-    height: 100px;
+  .home-menu-table {
+    position: relative;
+    top: -192px;
+    display: block;
     margin: 0 auto;
+    max-width: 1200px;
+    background: #ffffff;
+    border: 1px solid #696;
+    -webkit-box-shadow: #666 0 0 10px;
+    -moz-box-shadow: #666 0 0 10px;
+    box-shadow: #666 0 0 10px;
   }
 
-  .product-view-title-underline {
-    margin: 0;
-    display: inline-block;
-    width: 47px;
-    height: 2px;
-    background-color: rgba(67, 176, 42, 1);
-    margin-top: 5px;
-    margin-bottom: 30px;
+  .home-menu-table td {
+    text-align: center;
+    width: 400px;
+    height: 192px;
+    padding: 30px 20px;
+    cursor: pointer;
   }
+
+  .home-menu-table td:hover {
+    background: #7bc869;
+    color: #ffffff;
+  }
+
+  .home-menu-table td p {
+    font-size: 14px;
+    padding-top: 9px;
+  }
+
+  .home-menu-table td h3 {
+    font-size: 18px;
+    margin: 0;
+    padding-top: 8px;
+  }
+
+  .table-bordered {
+    border: 0;
+  }
+
+  .home-menu-table td.paddingClear {
+    padding: 0;
+  }
+
+  .step-list-wrap {
+    margin-top: 89px;
+    width: 100%;
+    background: #e8eae9;
+    height: 380px;
+    padding-top: 205px;
+    .step-list {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+
+
 </style>
